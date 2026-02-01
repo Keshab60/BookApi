@@ -1,0 +1,59 @@
+{
+  "info": {
+    "name": "Books API",
+    "_postman_id": "12345678-abcd-efgh-ijkl-1234567890ab",
+    "description": "Postman collection for testing the Books API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Book",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Node Basics\",\n  \"description\": \"Intro to Node.js runtime\",\n  \"author\": \"Keshab\",\n  \"publishDate\": \"2022-01-10\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:4000/storebook",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["storebook"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Explore Books",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:4000/books?searchTerm=node&author=Keshab&from=2022-01-01&to=2024-01-01&page=1&limit=5&sortBy=publishDate&order=desc",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "4000",
+          "path": ["books"],
+          "query": [
+            { "key": "searchTerm", "value": "node" },
+            { "key": "author", "value": "Keshab" },
+            { "key": "from", "value": "2022-01-01" },
+            { "key": "to", "value": "2024-01-01" },
+            { "key": "page", "value": "1" },
+            { "key": "limit", "value": "5" },
+            { "key": "sortBy", "value": "publishDate" },
+            { "key": "order", "value": "desc" }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
