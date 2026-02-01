@@ -33,32 +33,14 @@ app.get("/books", async (req, res) => {
         // Author filter (case-insensitive exact match)
         if (author) {
             query.author = new RegExp(`^${author}$`, "i"); // ^ and $ ensures exact match
-        }/* we use this new regex method to convert `^${author}$`, "i"  to this /^Keshab$/i  and later on the name is stored inside the query object like this
-         {
-          author: /^Keshab$/i
-         }*/
-        //when we do db.find(query) query object also conatins this author: /^Keshab$/i so /^Keshab$/i meaaning keshab is the author name and i means case insensitive and now find a document which include this name 
-
-
+        }
+        
         // Publish date range filter
         if (from || to) {
             query.publishDate = {};
             if (from) query.publishDate.$gte = new Date(from);
             if (to) query.publishDate.$lte = new Date(to);
-        }// it will become like this
-        //  const query={
-        //        publishDate: {
-        //            $gte: new Date("2026-01-01T00:00:00.000Z"),
-        //            $lte: new Date("2026-01-31T00:00:00.000Z")
-        //          }
-        //  }
-        //and when we do db.find(query),publishdate is stored inside the query object so indirectly mongodb        searches like this
-        //  db.books.find({
-        //         publishDate: {
-        //           $gte: new Date("2026-01-01T00:00:00.000Z"),
-        //           $lte: new Date("2026-01-31T00:00:00.000Z")
-        //         }
-        //   });  and this query searches inside the collection where the publishdate is present and the time lies between this range  
+        }
 
         //  Handle pagination
         const pageNumber = parseInt(page) || 1;
@@ -98,21 +80,5 @@ app.listen(process.env.PORT, () => console.log(`server running on port ${process
 
 
 
-// app.get("/books", async (req, res) => {
-//     try {
-//         const { searchTerm } = req.query;
 
-//         let query = {};
-
-//         if (searchTerm) {
-//             query.$text = { $search: searchTerm };
-//         }
-
-//         const books = await book.find(query);
-//         res.json(books);
-
-//     } catch (error) {
-//         res.status(400).json({ error: error.message });
-//     }
-// });
 
