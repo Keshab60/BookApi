@@ -59,7 +59,7 @@ app.get("/books", async (req, res) => {
         //           $lte: new Date("2026-01-31T00:00:00.000Z")
         //         }
         //   });  and this query searches inside the collection where the publishdate is present and the time lies between this range  
-
+        
         //  Handle pagination
         const pageNumber = parseInt(page) || 1;
         let limitNumber = parseInt(limit) || 10;
@@ -78,7 +78,7 @@ app.get("/books", async (req, res) => {
             .sort(sortObj)
             .skip(skip)
             .limit(limitNumber);
-            
+
         const totalBooks = await book.countDocuments(query);
         //  Send response
         res.json({
